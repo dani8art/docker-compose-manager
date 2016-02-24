@@ -1,5 +1,5 @@
 {
-  "name": "docker-manager",
+  "name": "docker-composer-manager",
   "version": "0.0.1",
   "description": "Module to manage dockers containers based on docker-compose",
   "main": "index.js",

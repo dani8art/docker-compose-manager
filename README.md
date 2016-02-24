@@ -6,7 +6,7 @@
 On your application package run next command:
 
 ```
-$ node npm install docker-manager
+$ node npm install docker-compose-manager
 ```
 
 ###You can use
