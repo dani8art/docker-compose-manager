@@ -10,9 +10,13 @@ exports.dockerComposeUp = function(dir, options, success, error){
 	execCommand(command, success, error, {cwd: dir});
 }
 
-exports.dockerComposeDown = function(dir, success, error){
+exports.dockerComposeDown = function(dir, options, success, error){
 	var command = 'docker-compose down';
 
+	if(options){
+		command += ' ' + options;
+	} 
+	
 	execCommand(command, success, error, {cwd: dir});
 
 }
