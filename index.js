@@ -4,9 +4,7 @@ exports.dockerComposeUp = function(dir, options, success, error){
 	var command = 'docker-compose up';
 
 	if(options){
-		for(option in options){
-			command += ' ' + options[option];
-		}
+		command += ' ' + options;
 	}
 
 	execCommand(command, success, error, {cwd: dir});
