@@ -1,7 +1,7 @@
 # DOCKER COMPOSE MANAGER NPM
 >This is BETA module and may have bugs and don't work correctly. It is intended for qualified beta testers only and must not be used in production systems.
 
-##Intallation
+## Installation
 
 On your application package run next command:
 
@@ -9,7 +9,7 @@ On your application package run next command:
 $ node npm install docker-compose-manager
 ```
 
-###You can use
+### You can use
 
 1. ```dockerComposeUp = function(dir, options, success, error)```
 2. ```dockerComposeDown = function(dir, success, error)```
