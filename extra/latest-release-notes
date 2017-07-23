@@ -1,6 +1,6 @@
 **<%= pkg.name %>** is open-source software available under the GNU General Public License (GPL) version 3 (GPL v3).
 
-For technical inquiry please contact to [engineering team](./extra/contact.md).
+For technical inquiry please contact to [engineering team](<%= pkg.repository.github %>/tree/master/extra/contact.md).
 
 ## Latest release
 
@@ -10,4 +10,4 @@ The version <%= pkg.version %> is the latest stable version of <%= pkg.name %> c
 see [release note](<%= pkg.repository.github %>/releases/tag/<%= pkg.version %>) for details.
 
 - Download this latest version from [<%= pkg.version %>](<%= pkg.repository.github %>/releases/tag/<%= pkg.version %>)
-- For usage instructions please read [documentation](./docs)
+- For usage instructions please read [documentation](<%= pkg.repository.github %>/tree/master/docs)
