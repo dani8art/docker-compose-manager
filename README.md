@@ -1,22 +1,21 @@
 # DOCKER COMPOSE MANAGER NPM
+
 >This is BETA module and may have bugs and don't work correctly. It is intended for qualified beta testers only and must not be used in production systems.
 
-## Installation
+NPM module to manage docker containers using docker-compose from Node JS applications. 
 
-On your application package run next command:
+## Copyright notice
 
-```
-$ node npm install docker-compose-manager
-```
+**docker-composer-manager** is open-source software available under the GNU General Public License (GPL) version 3 (GPL v3).
 
-### You can use
+For technical inquiry please contact to [engineering team](http://github.com/dani8art/docker-compose-manager/tree/master/extra/contact.md).
 
-1. ```dockerComposeUp = function(dir, options, success, error)```
-2. ```dockerComposeDown = function(dir, success, error)```
-3. ```dockerComposeStop = function(dir, success, error)```
-4. ```dockerComposeStart = function(dir, success, error)```
-5. ```dockerExec = function (container, exec_command, options, success, error)```
-6. ```dockerInspectIPAddressOfContainer = function (container, options)```
-7. ```dockerInspectPortOfContainer = function (container, options)```
+## Latest release
 
->Soon more documentation.
+[![Build Status](https://travis-ci.org/dani8art/docker-compose-manager.svg?branch=master)](https://travis-ci.org/http://github.com/dani8art/docker-compose-manager)
+
+The version 0.0.3 is the latest stable version of docker-composer-manager component.
+see [release note](http://github.com/dani8art/docker-compose-manager/releases/tag/0.0.3) for details.
+
+- Download this latest version from [0.0.3](http://github.com/dani8art/docker-compose-manager/releases/tag/0.0.3)
+- For usage instructions please read [documentation](http://github.com/dani8art/docker-compose-manager/tree/master/docs)
