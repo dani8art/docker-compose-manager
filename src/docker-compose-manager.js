@@ -84,13 +84,13 @@ module.exports.dockerExec = function (container, exec_command, options, success,
 module.exports.dockerInspectIPAddressOfContainer = function (container, options) {
     var command = "docker inspect --format '{{.NetworkSettings.Networks." + options.network + ".IPAddress}}' " + container;
 
-    return child_process.execSync(command).toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '');
+    return child_process.execSync(command).toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').replace(/'/ig, '');
 }
 
 module.exports.dockerInspectPortOfContainer = function (container, options) {
     var command = "docker inspect --format '{{.NetworkSettings.Ports}}' " + container;
 
-    return child_process.execSync(command).toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').split("[")[1].split("/")[0];
+    return child_process.execSync(command).toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').split("[")[1].split("/")[0].replace(/'/ig, '');
 }
 
 function _execCommand(command, success, error, options) {
