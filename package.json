@@ -1,45 +1,45 @@
 {
-    "name": "docker-composer-manager",
-    "buildOn": "2017-03-30",
-    "version": "0.0.3",
-    "description": "A NPM module to manage docker containers using docker-compose",
-    "homepage": "https://github.com/dani8art/docker-compose-manager",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "dependencies": {
-        "bluebird": "^3.4.7"
-    },
-    "devDependencies": {
-        "chai": "^3.5.0",
-        "grunt": "^1.0.1",
-        "grunt-banner": "^0.6.0",
-        "grunt-contrib-jshint": "^1.1.0",
-        "grunt-contrib-watch": "^1.0.0",
-        "grunt-header": "^1.1.0",
-        "grunt-mocha-test": "^0.13.2",
-        "grunt-release-github": "1.0.4",
-        "mocha": "^3.2.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/dani8art/docker-compose-manager.git",
-        "github": "http://github.com/dani8art/docker-compose-manager"
-    },
-    "bugs": {
-        "url": "https://github.com/dani8art/docker-compose-manager/issues"
-    },
-    "keywords": [
-        "npm",
-        "docker-management",
-        "docker",
-        "docker-compose",
-        "nodejs"
-    ],
-    "author": {
-        "name": "Daniel Arteaga",
-        "web": "http://darteaga.com"
-    },
-    "license": "GPL-3.0+"
+  "name": "docker-composer-manager",
+  "buildOn": "2017-03-30",
+  "version": "0.0.3",
+  "description": "A NPM module to manage docker containers using docker-compose",
+  "homepage": "https://github.com/dani8art/docker-compose-manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "grunt": "^1.0.1",
+    "grunt-banner": "^0.6.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-header": "^1.1.0",
+    "grunt-mocha-test": "^0.13.2",
+    "grunt-release-github": "1.0.4",
+    "mocha": "^3.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dani8art/docker-compose-manager.git",
+    "github": "http://github.com/dani8art/docker-compose-manager"
+  },
+  "bugs": {
+    "url": "https://github.com/dani8art/docker-compose-manager/issues"
+  },
+  "keywords": [
+    "npm",
+    "docker-management",
+    "docker",
+    "docker-compose",
+    "nodejs"
+  ],
+  "author": {
+    "name": "Daniel Arteaga",
+    "web": "http://darteaga.com"
+  },
+  "license": "GPL-3.0+"
 }

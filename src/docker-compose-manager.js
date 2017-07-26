@@ -19,92 +19,114 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 'use strict';
 
-var child_process = require('child_process');
+var cmd = require('./cmd/cmd');
 
-module.exports.dockerComposeUp = function (dir, options, success, error) {
-    var command = 'docker-compose up';
+module.exports = {
+    dockerComposeUp: dockerComposeUp,
+    dockerComposeDown: dockerComposeDown,
+    dockerComposeStop: dockerComposeStop,
+    dockerComposeStart: dockerComposeStart,
+    dockerExec: dockerExec,
+    dockerInspectIPAddressOfContainer: dockerInspectIPAddressOfContainer,
+    dockerInspectPortOfContainer: dockerInspectPortOfContainer
+};
 
-    if (options) {
-        command += ' ' + options;
-    }
+function dockerComposeUp(file, options) {
+    return new Promise((resolve, reject) => {
+        options = options ? options : [];
+        var command = 'docker-compose';
+        var arg = ['-f', file, 'up', '-d'].concat(options);
 
-    _execCommand(command, success, error, {
-        cwd: dir
+        cmd.execCommand(command, arg).then(child => {
+            child.stdout.on('data', data => console.log(data.toString()));
+            child.stderr.on('data', data => console.log(data.toString()));
+            child.stdout.on('close', code => { if (!code) resolve(); else reject(code); });
+        });
     });
 }
 
-module.exports.dockerComposeDown = function (dir, options, success, error) {
-    var command = 'docker-compose down';
+function dockerComposeDown(file, options) {
+    return new Promise((resolve, reject) => {
+        options = options ? options : [];
+        var command = 'docker-compose';
+        var arg = ['-f', file, 'down'].concat(options);
 
-    if (options) {
-        command += ' ' + options;
-    }
-
-    _execCommand(command, success, error, {
-        cwd: dir
+        cmd.execCommand(command, arg).then(child => {
+            child.stdout.on('data', data => console.log(data.toString()));
+            child.stderr.on('data', data => console.log(data.toString()));
+            child.stdout.on('close', code => { if (!code) resolve(); else reject(code); });
+        });
     });
-
 }
 
-module.exports.dockerComposeStop = function (dir, success, error) {
-    var command = 'docker-compose stop';
+function dockerComposeStop(file, options) {
+    return new Promise((resolve, reject) => {
+        options = options ? options : [];
+        var command = 'docker-compose';
+        var arg = ['-f', file, 'stop'].concat(options);
 
-    _execCommand(command, success, error, {
-        cwd: dir
+        cmd.execCommand(command, arg).then(child => {
+            child.stdout.on('data', data => console.log(data.toString()));
+            child.stderr.on('data', data => console.log(data.toString()));
+            child.stdout.on('close', code => { if (!code) resolve(); else reject(code); });
+        });
     });
-
 }
 
-module.exports.dockerComposeStart = function (dir, success, error) {
-    var command = 'docker-compose start';
+function dockerComposeStart(file, options) {
+    return new Promise((resolve, reject) => {
+        options = options ? options : [];
+        var command = 'docker-compose';
+        var arg = ['-f', file, 'start'].concat(options);
 
-    _execCommand(command, success, error, {
-        cwd: dir
+        cmd.execCommand(command, arg).then(child => {
+            child.stdout.on('data', data => console.log(data.toString()));
+            child.stderr.on('data', data => console.log(data.toString()));
+            child.stdout.on('close', code => { if (!code) resolve(); else reject(code); });
+        });
     });
-
 }
 
-module.exports.dockerExec = function (container, exec_command, options, success, error) {
-    var command = 'docker exec';
+function dockerExec(container, exec_command, options) {
+    return new Promise((resolve, reject) => {
+        options = options ? options : [];
+        var command = 'docker';
+        var arg = ['exec'].concat(options).concat(container).concat(exec_command);
 
-    if (options) {
-        for (option in options) {
-            command += ' ' + options[option];
-        }
-    }
-
-    command += ' ' + container;
-
-    command += ' ' + exec_command;
-
-    _execCommand(command, success, error);
-
-}
-
-module.exports.dockerInspectIPAddressOfContainer = function (container, options) {
-    var command = "docker inspect --format '{{.NetworkSettings.Networks." + options.network + ".IPAddress}}' " + container;
-
-    return child_process.execSync(command).toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').replace(/'/ig, '');
-}
-
-module.exports.dockerInspectPortOfContainer = function (container, options) {
-    var command = "docker inspect --format '{{.NetworkSettings.Ports}}' " + container;
-
-    return child_process.execSync(command).toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').split("[")[1].split("/")[0].replace(/'/ig, '');
-}
-
-function _execCommand(command, success, error, options) {
-
-    child_process.exec(command, options, function (err, stdout, stderr) {
-        if (!err) {
-            if (success)
-                success(stdout, stderr);
-        } else {
-            if (error)
-                error(err, stderr);
-        }
+        cmd.execCommand(command, arg).then(child => {
+            child.stdout.on('data', data => console.log(data.toString()));
+            child.stderr.on('data', data => console.log(data.toString()));
+            child.stdout.on('close', code => { if (!code) resolve(); else reject(code); });
+        });
     });
-
 }
 
-module.exports.execCommand = _execCommand;
+function dockerInspectIPAddressOfContainer(container, options) {
+    return new Promise((resolve, reject) => {
+        options = options ? options : [];
+        var command = 'docker';
+        var arg = ['inspect', '--format', "'{{.NetworkSettings.Networks." + options.network + ".IPAddress}}'", container];
+
+        var ip;
+        cmd.execCommand(command, arg).then(child => {
+            child.stdout.on('data', data => ip = data.toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').replace(/'/ig, ''));
+            child.stderr.on('data', data => console.log(data.toString()));
+            child.stdout.on('close', code => { if (!code) resolve(ip); else reject(code); });
+        });
+    });
+}
+
+function dockerInspectPortOfContainer(container) {
+    return new Promise((resolve, reject) => {
+        // options = options ? options : [];
+        var command = 'docker';
+        var arg = ['inspect', '--format', "'{{.NetworkSettings.Ports}}'", container];
+
+        var port;
+        cmd.execCommand(command, arg).then(child => {
+            child.stdout.on('data', data => port = data.toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').split("[")[1].split("/")[0].replace(/'/ig, ''));
+            child.stderr.on('data', data => console.log(data.toString()));
+            child.stdout.on('close', code => { if (!code) resolve(port); else reject(code); });
+        });
+    });
+}

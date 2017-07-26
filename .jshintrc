@@ -2,7 +2,7 @@
     "bitwise": true,
     "browser": true,
     "camelcase": false,
-    "curly": true,
+    "curly": false,
     "loopfunc": true,
     "eqeqeq": false,
     "immed": true,
@@ -20,7 +20,6 @@
     "esversion": 6,
     "validthis": true,
     "eqnull": true,
-
     "globals": {
         "module": true,
         "describe": true,
