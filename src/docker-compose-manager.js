@@ -37,10 +37,14 @@ function dockerComposeUp(file, options) {
         var command = 'docker-compose';
         var arg = ['-f', file, 'up', '-d'].concat(options);
 
+        var out = "";
         cmd.execCommand(command, arg).then(child => {
-            child.stdout.on('data', data => console.log(data.toString()));
-            child.stderr.on('data', data => console.log(data.toString()));
-            child.stdout.on('close', code => { if (!code) resolve(); else reject(code); });
+            child.stdout.on('data', data => out += data.toString());
+            child.stderr.on('data', data => out += data.toString());
+            child.on('close', code => {
+                if (!code) resolve(out);
+                else reject({ code: code, err: out });
+            });
         });
     });
 }
@@ -51,10 +55,14 @@ function dockerComposeDown(file, options) {
         var command = 'docker-compose';
         var arg = ['-f', file, 'down'].concat(options);
 
+        var out = "";
         cmd.execCommand(command, arg).then(child => {
-            child.stdout.on('data', data => console.log(data.toString()));
-            child.stderr.on('data', data => console.log(data.toString()));
-            child.stdout.on('close', code => { if (!code) resolve(); else reject(code); });
+            child.stdout.on('data', data => out += data.toString());
+            child.stderr.on('data', data => out += data.toString());
+            child.on('close', code => {
+                if (!code) resolve(out);
+                else reject({ code: code, err: out });
+            });
         });
     });
 }
@@ -65,10 +73,14 @@ function dockerComposeStop(file, options) {
         var command = 'docker-compose';
         var arg = ['-f', file, 'stop'].concat(options);
 
+        var out = "";
         cmd.execCommand(command, arg).then(child => {
-            child.stdout.on('data', data => console.log(data.toString()));
-            child.stderr.on('data', data => console.log(data.toString()));
-            child.stdout.on('close', code => { if (!code) resolve(); else reject(code); });
+            child.stdout.on('data', data => out += data.toString());
+            child.stderr.on('data', data => out += data.toString());
+            child.on('close', code => {
+                if (!code) resolve(out);
+                else reject({ code: code, err: out });
+            });
         });
     });
 }
@@ -79,10 +91,14 @@ function dockerComposeStart(file, options) {
         var command = 'docker-compose';
         var arg = ['-f', file, 'start'].concat(options);
 
+        var out = "";
         cmd.execCommand(command, arg).then(child => {
-            child.stdout.on('data', data => console.log(data.toString()));
-            child.stderr.on('data', data => console.log(data.toString()));
-            child.stdout.on('close', code => { if (!code) resolve(); else reject(code); });
+            child.stdout.on('data', data => out += data.toString());
+            child.stderr.on('data', data => out += data.toString());
+            child.on('close', code => {
+                if (!code) resolve(out);
+                else reject({ code: code, err: out });
+            });
         });
     });
 }
@@ -93,10 +109,14 @@ function dockerExec(container, exec_command, options) {
         var command = 'docker';
         var arg = ['exec'].concat(options).concat(container).concat(exec_command);
 
+        var out = "";
         cmd.execCommand(command, arg).then(child => {
-            child.stdout.on('data', data => console.log(data.toString()));
-            child.stderr.on('data', data => console.log(data.toString()));
-            child.stdout.on('close', code => { if (!code) resolve(); else reject(code); });
+            child.stdout.on('data', data => out += data.toString());
+            child.stderr.on('data', data => out += data.toString());
+            child.on('close', code => {
+                if (!code) resolve(out);
+                else reject({ code: code, err: out });
+            });
         });
     });
 }
@@ -107,11 +127,14 @@ function dockerInspectIPAddressOfContainer(container, options) {
         var command = 'docker';
         var arg = ['inspect', '--format', "'{{.NetworkSettings.Networks." + options.network + ".IPAddress}}'", container];
 
-        var ip;
+        var out = "";
         cmd.execCommand(command, arg).then(child => {
-            child.stdout.on('data', data => ip = data.toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').replace(/'/ig, ''));
-            child.stderr.on('data', data => console.log(data.toString()));
-            child.stdout.on('close', code => { if (!code) resolve(ip); else reject(code); });
+            child.stdout.on('data', data => out += data.toString());
+            child.stderr.on('data', data => out += data.toString());
+            child.on('close', code => {
+                if (!code) resolve(out.toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').replace(/'/ig, ''));
+                else reject({ code: code, err: out });
+            });
         });
     });
 }
@@ -122,11 +145,14 @@ function dockerInspectPortOfContainer(container) {
         var command = 'docker';
         var arg = ['inspect', '--format', "'{{.NetworkSettings.Ports}}'", container];
 
-        var port;
+        var out = "";
         cmd.execCommand(command, arg).then(child => {
-            child.stdout.on('data', data => port = data.toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').split("[")[1].split("/")[0].replace(/'/ig, ''));
-            child.stderr.on('data', data => console.log(data.toString()));
-            child.stdout.on('close', code => { if (!code) resolve(port); else reject(code); });
+            child.stdout.on('data', data => out += data.toString());
+            child.stderr.on('data', data => out += data.toString());
+            child.on('close', code => {
+                if (!code) resolve(out.toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').split("[")[1].split("/")[0].replace(/'/ig, ''));
+                else reject({ code: code, err: out });
+            });
         });
     });
 }

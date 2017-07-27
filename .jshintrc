@@ -16,7 +16,7 @@
     "strict": true,
     "trailing": true,
     "undef": true,
-    "unused": true,
+    "unused": false,
     "esversion": 6,
     "validthis": true,
     "eqnull": true,
