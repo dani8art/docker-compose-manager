@@ -6,7 +6,6 @@
  */
 
 var spawn = require('child_process').spawn,
-    logger = require('../logger/logger'),
     Promise = require('bluebird');
 
 module.exports = {
