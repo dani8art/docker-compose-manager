@@ -19,15 +19,69 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 'use strict';
 
+/**
+ * Command line interface 
+ * @module docker-compose-manager/docker-compose-manager
+ */
+
 var cmd = require('./cmd/cmd');
 
 module.exports = {
+    /**
+     * Docker compose up command. This up a docker-compose.yaml given
+     * @param {string} file - The file with docker-componse that will be upped.
+     * @param {object} options - Options object.
+     * @return {Promise} A promise.
+     */
     dockerComposeUp: dockerComposeUp,
+
+    /**
+     * Docker compose down command. This down a docker-compose.yaml given
+     * @param {string} file - The file with docker-componse that will be down.
+     * @param {object} options - Options object.
+     * @return {Promise} A promise.
+     */
     dockerComposeDown: dockerComposeDown,
+
+    /**
+     * Docker compose stop command. This stop a docker-compose.yaml given
+     * @param {string} file - The file with docker-componse that will be stopped.
+     * @param {object} options - Options object.
+     * @return {Promise} A promise.
+     */
     dockerComposeStop: dockerComposeStop,
+
+    /**
+     * Docker compose start command. This start a docker-compose.yaml given
+     * @param {string} file - The file with docker-componse that will be started.
+     * @param {object} options - Options object.
+     * @return {Promise} A promise.
+     */
     dockerComposeStart: dockerComposeStart,
+
+    /**
+     * Docker exec command. This execute a command on the container given
+     * @param {string} container - The container where the command will be executed.
+     * @param {object} exec_command - The command will be executed
+     * @param {string} options - Options object.
+     * @return {Promise} A promise.
+     */
     dockerExec: dockerExec,
+
+    /**
+     * This method return the IP of a container given
+     * @param {string} container - The container that will be inspected.
+     * @param {string} options - Options object. options.network
+     * @return {Promise} A promise.
+     */
     dockerInspectIPAddressOfContainer: dockerInspectIPAddressOfContainer,
+
+    /**
+     * This method return the PORT of a container given
+     * @param {string} container - The container that will be inspected.
+     * @param {string} options - Options object. options.network
+     * @return {Promise} A promise.
+     */
     dockerInspectPortOfContainer: dockerInspectPortOfContainer
 };
 
