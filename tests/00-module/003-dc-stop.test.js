@@ -14,7 +14,7 @@ describe('docker-compose stop tests', function () {
 
         var expected = fs.readFileSync('./tests/00-module/expected/dc-stop.expected.txt', 'utf-8');
         module.dockerComposeStop(file).then(out => {
-            expect(out.replace(/^\s+|\s+$/gm, '')).to.equal(expected.replace(/^\s+|\s+$/gm, ''));
+            expect(out.replace(/\\n|\\r/gm, '')).to.equal(expected.replace(/\\n|\\r/gm, ''));
             done();
         }, done);
 
