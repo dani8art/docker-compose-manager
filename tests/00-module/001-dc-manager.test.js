@@ -65,7 +65,7 @@ describe('Docker compose manager Module tests', function () {
         }).then(() => {
             return module.dockerComposeStart(file);
         }).then(() => {
-            return module.dockerExec('mongo', ['mongo', '--version']);
+            return module.dockerExec('tests_mongo_1', ['mongo', '--version']);
         }).then(() => {
             return module.dockerInspectIPAddressOfContainer('tests_mongo_1', { network: "tests_default" }).then(ip => {
                 expect(ip).to.be.equal('172.18.0.2');
