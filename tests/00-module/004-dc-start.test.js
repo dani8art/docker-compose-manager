@@ -12,9 +12,9 @@ describe('docker-compose start tests', function () {
     var file = __dirname + '/../docker-compose.yaml';
     it('Execute command start', done => {
 
-        var expected = fs.readFileSync('./tests/00-module/expected/dc-start.expected.txt', 'utf-8').replace('\n', '').replace('\r', '');
+        var expected = fs.readFileSync('./tests/00-module/expected/dc-start.expected.txt', 'utf-8').trim();
         module.dockerComposeStart(file).then(out => {
-            expect(out.replace('\n', '').replace('\r', '')).to.equal(expected);
+            expect(out.trim()).to.equal(expected);
             done();
         }, done);
 
