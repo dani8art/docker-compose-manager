@@ -12,9 +12,9 @@ describe('docker-compose down tests', function () {
     var file = __dirname + '/../docker-compose.yaml';
     it('Execute command down', done => {
 
-        var expected = fs.readFileSync('./tests/00-module/expected/dc-down.expected.txt', 'utf-8').trim();
+        var expected = fs.readFileSync('./tests/00-module/expected/dc-down.expected.txt', 'utf-8');
         module.dockerComposeDown(file).then(out => {
-            expect(out.trim()).to.equal(expected);
+            expect(out.replace(/^\s+|\s+$/gm, '')).to.equal(expected.replace(/^\s+|\s+$/gm, ''));
             done();
         }, done);
 

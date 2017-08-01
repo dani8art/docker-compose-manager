@@ -12,9 +12,9 @@ describe('docker-compose stop tests', function () {
     var file = __dirname + '/../docker-compose.yaml';
     it('Execute command stop', done => {
 
-        var expected = fs.readFileSync('./tests/00-module/expected/dc-stop.expected.txt', 'utf-8').trim();
+        var expected = fs.readFileSync('./tests/00-module/expected/dc-stop.expected.txt', 'utf-8');
         module.dockerComposeStop(file).then(out => {
-            expect(out.trim()).to.equal(expected);
+            expect(out.replace(/^\s+|\s+$/gm, '')).to.equal(expected.replace(/^\s+|\s+$/gm, ''));
             done();
         }, done);
 
