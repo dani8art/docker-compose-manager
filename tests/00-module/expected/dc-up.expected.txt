@@ -1,4 +1,0 @@
-Creating network "tests_default" with the default driver
-Creating tests_mongo_1 ... 
-Creating tests_mongo_1
-[1A[2KCreating tests_mongo_1 ... [32mdone[0m[1B

@@ -1,2 +1,0 @@
-Starting mongo ... 
-[1A[2KStarting mongo ... [32mdone[0m[1B

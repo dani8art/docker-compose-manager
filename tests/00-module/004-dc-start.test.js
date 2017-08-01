@@ -12,9 +12,9 @@ describe('docker-compose start tests', function () {
     var file = __dirname + '/../docker-compose.yaml';
     it('Execute command start', done => {
 
-        var expected = fs.readFileSync('./tests/00-module/expected/dc-start.expected.txt', 'utf-8');
         module.dockerComposeStart(file).then(out => {
-            expect(out.replace(/\\n|\\r/gm, '')).to.equal(expected.replace(/\\n|\\r/gm, ''));
+            expect(out.indexOf('Starting mongo')).to.not.equal(-1);
+            expect(out.indexOf('done')).to.not.equal(-1);
             done();
         }, done);
 
