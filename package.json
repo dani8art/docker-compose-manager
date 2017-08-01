@@ -1,6 +1,6 @@
 {
   "name": "docker-composer-manager",
-  "buildOn": "2017-03-30",
+  "buildOn": "2017-08-01",
   "version": "0.1.0",
   "description": "A NPM module to manage docker containers using docker-compose",
   "homepage": "https://github.com/dani8art/docker-compose-manager",

@@ -1,5 +1,5 @@
 /*!
-docker-composer-manager 0.0.3, built on: 2017-03-30
+docker-composer-manager 0.1.0, built on: 2017-08-01
 Copyright (C) 2017 Daniel Arteaga
 http://darteaga.com
 https://github.com/dani8art/docker-compose-manager
@@ -16,6 +16,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
+
 
 'use strict';
 
