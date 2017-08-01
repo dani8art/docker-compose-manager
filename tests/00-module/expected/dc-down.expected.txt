@@ -1,3 +1,0 @@
-Stopping tests_mongo_1 ... 
-[1A[2KStopping tests_mongo_1 ... [32mdone[0m[1BRemoving tests_mongo_1 ... 
-[1A[2KRemoving tests_mongo_1 ... [32mdone[0m[1BRemoving network tests_default

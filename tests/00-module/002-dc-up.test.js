@@ -12,9 +12,10 @@ describe('docker-compose up tests', function () {
     var file = __dirname + '/../docker-compose.yaml';
     it('Execute command up', done => {
 
-        var expected = fs.readFileSync('./tests/00-module/expected/dc-up.expected.txt', 'utf-8');
         module.dockerComposeUp(file).then(out => {
-            expect(out).to.equal(expected);
+            expect(out.indexOf('Creating network "tests_default" with the default driver')).to.not.equal(-1);
+            expect(out.indexOf('Creating tests_mongo_1')).to.not.equal(-1);
+            expect(out.indexOf('done')).to.not.equal(-1);
             done();
         }, done);
 

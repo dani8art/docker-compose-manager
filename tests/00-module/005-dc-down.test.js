@@ -12,9 +12,11 @@ describe('docker-compose down tests', function () {
     var file = __dirname + '/../docker-compose.yaml';
     it('Execute command down', done => {
 
-        var expected = fs.readFileSync('./tests/00-module/expected/dc-down.expected.txt', 'utf-8');
         module.dockerComposeDown(file).then(out => {
-            expect(out).to.equal(expected);
+            expect(out.indexOf('Stopping tests_mongo_1')).to.not.equal(-1);
+            expect(out.indexOf('Removing tests_mongo_1')).to.not.equal(-1);
+            expect(out.indexOf('done')).to.not.equal(-1);
+            expect(out.indexOf('Removing network tests_default')).to.not.equal(-1);
             done();
         }, done);
 
