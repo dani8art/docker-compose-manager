@@ -3,7 +3,7 @@
 ### Docker compose manager module for node.js
 
 ```
-npm i docker-compose-manager --save
+npm i docker-composer-manager --save
 ```
 
 ## Docker compose manager API
