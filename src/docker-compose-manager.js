@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 'use strict';
 
 /**
- * Command line interface 
+ * Command line interface
  * @module docker-compose-manager/docker-compose-manager
  */
 
@@ -90,7 +90,13 @@ function dockerComposeUp(file, options) {
     return new Promise((resolve, reject) => {
         options = options ? options : [];
         var command = 'docker-compose';
-        var arg = ['-f', file, 'up', '-d'].concat(options);
+
+        var defaultOptions = ['-f', file, 'up', '-d'];
+        if (options.indexOf('--abort-on-container-exit') > -1) {
+            defaultOptions = ['-f', file, 'up'];
+        }
+
+        var arg = defaultOptions.concat(options);
 
         var out = "";
         cmd.execCommand(command, arg).then(child => {
