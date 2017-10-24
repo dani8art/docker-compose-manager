@@ -1,3 +1,11 @@
+### v0.1.2 - 2017-10-24
+
+- [#22](https://github.com/dani8art/docker-compose-manager/issues/22) - Remove '-d' option from dockerComposeUp command
+
+- [#21](https://github.com/dani8art/docker-compose-manager/issues/21) - Update the version of 'grunt-release-github' to version 2.0.0
+
+- [#20](https://github.com/dani8art/docker-compose-manager/issues/20) - update documentation with the actual name "docker-composer-manager"
+
 ### v0.1.0 - 2017-71-1
 
 - [#13](https://github.com/dani8art/docker-compose-manager/issues/13) - Remove BETA notice on README.md
