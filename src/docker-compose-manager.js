@@ -31,6 +31,7 @@ module.exports = {
     /**
      * Docker compose up command. This up a docker-compose.yaml given
      * @param {string} file - The file with docker-componse that will be upped.
+     * @param {object} args - Arguments object.
      * @param {object} options - Options object.
      * @return {Promise} A promise.
      */
@@ -86,25 +87,25 @@ module.exports = {
     dockerInspectPortOfContainer: dockerInspectPortOfContainer
 };
 
-function dockerComposeUp(file, options) {
+function dockerComposeUp(file, args, options) {
     return new Promise((resolve, reject) => {
-        options = options ? options : [];
+        args = args ? args : [];
         var command = 'docker-compose';
 
         var defaultOptions = ['-f', file, 'up', '-d'];
-        if (options.indexOf('--abort-on-container-exit') > -1) {
+        if (args.indexOf('--abort-on-container-exit') > -1) {
             defaultOptions = ['-f', file, 'up'];
         }
 
-        var arg = defaultOptions.concat(options);
-
+        var arg = defaultOptions.concat(args);
         var out = "";
-        cmd.execCommand(command, arg).then(child => {
+
+        cmd.execCommand(command, arg, options).then(child => {
             child.stdout.on('data', data => out += data.toString());
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
                 if (!code) resolve(out);
-                else reject({ code: code, err: out });
+                else reject({code: code, err: out});
             });
         });
     });
@@ -122,7 +123,7 @@ function dockerComposeDown(file, options) {
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
                 if (!code) resolve(out);
-                else reject({ code: code, err: out });
+                else reject({code: code, err: out});
             });
         });
     });
@@ -140,7 +141,7 @@ function dockerComposeStop(file, options) {
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
                 if (!code) resolve(out);
-                else reject({ code: code, err: out });
+                else reject({code: code, err: out});
             });
         });
     });
@@ -158,7 +159,7 @@ function dockerComposeStart(file, options) {
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
                 if (!code) resolve(out);
-                else reject({ code: code, err: out });
+                else reject({code: code, err: out});
             });
         });
     });
@@ -176,7 +177,7 @@ function dockerExec(container, exec_command, options) {
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
                 if (!code) resolve(out);
-                else reject({ code: code, err: out });
+                else reject({code: code, err: out});
             });
         });
     });
@@ -194,7 +195,7 @@ function dockerInspectIPAddressOfContainer(container, options) {
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
                 if (!code) resolve(out.toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').replace(/'/ig, ''));
-                else reject({ code: code, err: out });
+                else reject({code: code, err: out});
             });
         });
     });
@@ -212,7 +213,7 @@ function dockerInspectPortOfContainer(container) {
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
                 if (!code) resolve(out.toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').split("[")[1].split("/")[0].replace(/'/ig, ''));
-                else reject({ code: code, err: out });
+                else reject({code: code, err: out});
             });
         });
     });
