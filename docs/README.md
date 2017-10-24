@@ -25,7 +25,8 @@ This method receives a URI of a file and builds, (re)creates, starts, and attach
   Name | Type | Description 
   -----|------|-------------
   **file** | `string` | **Required.** The file where the service is described. 
-  **options** | `[string]` | **Optional.** Docker compose up commad [options](https://docs.docker.com/compose/reference/up/).
+  **args** | `[string]` | **Optional.** Docker compose up commad [options](https://docs.docker.com/compose/reference/up/).
+  **options** | `[string]` | **Optional.** NodeJS child_process.spawn [options](https://nodejs.org/docs/latest-v6.x/api/child_process.html#child_process_child_process_spawn_command_args_options).
 
 #### Example
 
