@@ -26,7 +26,7 @@ var module = require('../../src/docker-compose-manager'),
     fs = require('fs');
 
 describe('docker-compose up tests', function () {
-    this.timeout(30000);
+    this.timeout(60000);
 
     var file = __dirname + '/../docker-compose.yaml';
     it('Execute command up', done => {
