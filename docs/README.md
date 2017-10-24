@@ -30,7 +30,7 @@ This method receives a URI of a file and builds, (re)creates, starts, and attach
 #### Example
 
 ```javascript
-var dcManager = require('docker-compose-manager');
+var dcManager = require('docker-composer-manager');
 var file = __dirname + '/docker-compose.yaml';
 
 dcManager.dockerComposeUp(file).then(out => {
@@ -54,7 +54,7 @@ This method receives a URI of a file and stops containers, removes containers, n
 #### Example
 
 ```javascript
-var dcManager = require('docker-compose-manager');
+var dcManager = require('docker-composer-manager');
 var file = __dirname + '/docker-compose.yaml';
 
 dcManager.dockerComposeDown(file).then(out => {
@@ -78,7 +78,7 @@ This method receives a URI of a file and stops running containers without removi
 #### Example
 
 ```javascript
-var dcManager = require('docker-compose-manager');
+var dcManager = require('docker-composer-manager');
 var file = __dirname + '/docker-compose.yaml';
 
 dcManager.dockerComposeStop(file).then(out => {
@@ -102,7 +102,7 @@ This method receives a URI of a file and sStarts existing containers for a servi
 #### Example
 
 ```javascript
-var dcManager = require('docker-compose-manager');
+var dcManager = require('docker-composer-manager');
 var file = __dirname + '/docker-compose.yaml';
 
 dcManager.dockerComposeStart(file).then(out => {
@@ -127,7 +127,7 @@ This method receives a container name and the command will be executed inside of
 #### Example
 
 ```javascript
-var dcManager = require('docker-compose-manager'),
+var dcManager = require('docker-composer-manager'),
     container = 'node_container_01',
     command = ['node', '--version'];
 
@@ -152,7 +152,7 @@ This method receives a container and retrun a promise that resolves the ip of it
 #### Example
 
 ```javascript
-var dcManager = require('docker-compose-manager'),
+var dcManager = require('docker-composer-manager'),
     container = 'node_container_01';
 
 dcManager.dockerInspectIPAddressOfContainer(container,{network: "bridge"}).then(ip => {
@@ -175,7 +175,7 @@ This method receives a container and retrun a promise that resolves the port on 
 #### Example
 
 ```javascript
-var dcManager = require('docker-compose-manager'),
+var dcManager = require('docker-composer-manager'),
     container = 'node_container_01';
 
 dcManager.dockerInspectPortOfContainer(container).then(port => {

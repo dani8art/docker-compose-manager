@@ -96,15 +96,13 @@ module.exports = function (grunt) {
         //"grunt release:major" for major version
         release: {
             options: {
+                packageObject: 'pkg',
                 changelog: true, //NOT CHANGE
                 changelogFromGithub: true, //NOT CHANGE
                 githubReleaseBody: 'See [CHANGELOG.md](./CHANGELOG.md) for details.', //NOT CHANGE
                 npm: true, //CHANGE TO TRUE IF YOUR PROJECT IS A NPM MODULE 
                 //npmtag: true, //default: no tag
-                beforeBumpTasks: [], // IS NOT READY YET
-                afterBumpTasks: ['build'], // IS NOT READY YET
-                beforeReleaseTasks: [], // IS NOT READY YET
-                afterReleaseTasks: [], // IS NOT READY YET
+                afterBump: ['build'], // IS NOT READY YET
                 updateVars: ['pkg'], //NOT CHANGE
                 github: {
                     repo: "dani8art/docker-compose-manager",

@@ -21,12 +21,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 process.env.NODE_ENV = "test";
 
+var chai = require('chai');
+chai.use(require('chai-match'));
 var expect = require('chai').expect;
+
 var module = require('../../src/docker-compose-manager'),
     logger = require('../../src/logger/logger');
 
 describe('Docker compose manager Module tests', function () {
-    this.timeout(30000);
+    this.timeout(60000);
 
     it('The module exposes "dockerComposeUp" function', () => {
 
@@ -87,7 +90,7 @@ describe('Docker compose manager Module tests', function () {
             return module.dockerExec('tests_mongo_1', ['mongo', '--version']);
         }).then(() => {
             return module.dockerInspectIPAddressOfContainer('tests_mongo_1', { network: "tests_default" }).then(ip => {
-                expect(ip).to.be.equal('172.18.0.2');
+                expect(ip).to.match(/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/);
             });
         }).then(() => {
             return module.dockerInspectPortOfContainer('tests_mongo_1').then(port => {
