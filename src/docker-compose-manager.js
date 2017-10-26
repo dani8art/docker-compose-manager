@@ -32,7 +32,7 @@ module.exports = {
      * Docker compose up command. This up a docker-compose.yaml given
      * @param {string} file - The file with docker-componse that will be upped.
      * @param {object} args - Arguments object.
-     * @param {object} options - Options object.
+     * @param {object} options - child_process.spawn options.
      * @return {Promise} A promise.
      */
     dockerComposeUp: dockerComposeUp,
@@ -40,7 +40,8 @@ module.exports = {
     /**
      * Docker compose down command. This down a docker-compose.yaml given
      * @param {string} file - The file with docker-componse that will be down.
-     * @param {object} options - Options object.
+     * @param {object} args - Arguments object.
+     * @param {object} options - child_process.spawn options.
      * @return {Promise} A promise.
      */
     dockerComposeDown: dockerComposeDown,
@@ -48,7 +49,8 @@ module.exports = {
     /**
      * Docker compose stop command. This stop a docker-compose.yaml given
      * @param {string} file - The file with docker-componse that will be stopped.
-     * @param {object} options - Options object.
+     * @param {object} args - Arguments object.
+     * @param {object} options - child_process.spawn options.
      * @return {Promise} A promise.
      */
     dockerComposeStop: dockerComposeStop,
@@ -56,7 +58,8 @@ module.exports = {
     /**
      * Docker compose start command. This start a docker-compose.yaml given
      * @param {string} file - The file with docker-componse that will be started.
-     * @param {object} options - Options object.
+     * @param {object} args - Arguments object.
+     * @param {object} options - child_process.spawn options.
      * @return {Promise} A promise.
      */
     dockerComposeStart: dockerComposeStart,
@@ -65,7 +68,8 @@ module.exports = {
      * Docker exec command. This execute a command on the container given
      * @param {string} container - The container where the command will be executed.
      * @param {object} exec_command - The command will be executed
-     * @param {string} options - Options object.
+     * @param {string} args - Arguments object.
+     * @param {object} options - child_process.spawn options.
      * @return {Promise} A promise.
      */
     dockerExec: dockerExec,
@@ -73,7 +77,8 @@ module.exports = {
     /**
      * This method return the IP of a container given
      * @param {string} container - The container that will be inspected.
-     * @param {string} options - Options object. options.network
+     * @param {string} args - Options object. options.network
+     * @param {object} options - child_process.spawn options.
      * @return {Promise} A promise.
      */
     dockerInspectIPAddressOfContainer: dockerInspectIPAddressOfContainer,
@@ -81,7 +86,7 @@ module.exports = {
     /**
      * This method return the PORT of a container given
      * @param {string} container - The container that will be inspected.
-     * @param {string} options - Options object. options.network
+     * @param {object} options - child_process.spawn options.
      * @return {Promise} A promise.
      */
     dockerInspectPortOfContainer: dockerInspectPortOfContainer
@@ -111,14 +116,14 @@ function dockerComposeUp(file, args, options) {
     });
 }
 
-function dockerComposeDown(file, options) {
+function dockerComposeDown(file, args, options) {
     return new Promise((resolve, reject) => {
-        options = options ? options : [];
+        args = args ? args : [];
         var command = 'docker-compose';
-        var arg = ['-f', file, 'down'].concat(options);
+        var arg = ['-f', file, 'down'].concat(args);
 
         var out = "";
-        cmd.execCommand(command, arg).then(child => {
+        cmd.execCommand(command, arg, options).then(child => {
             child.stdout.on('data', data => out += data.toString());
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
@@ -129,14 +134,14 @@ function dockerComposeDown(file, options) {
     });
 }
 
-function dockerComposeStop(file, options) {
+function dockerComposeStop(file, args, options) {
     return new Promise((resolve, reject) => {
-        options = options ? options : [];
+        args = args ? args : [];
         var command = 'docker-compose';
-        var arg = ['-f', file, 'stop'].concat(options);
+        var arg = ['-f', file, 'stop'].concat(args);
 
         var out = "";
-        cmd.execCommand(command, arg).then(child => {
+        cmd.execCommand(command, arg, options).then(child => {
             child.stdout.on('data', data => out += data.toString());
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
@@ -147,14 +152,14 @@ function dockerComposeStop(file, options) {
     });
 }
 
-function dockerComposeStart(file, options) {
+function dockerComposeStart(file, args, options) {
     return new Promise((resolve, reject) => {
-        options = options ? options : [];
+        args = args ? args : [];
         var command = 'docker-compose';
-        var arg = ['-f', file, 'start'].concat(options);
+        var arg = ['-f', file, 'start'].concat(args);
 
         var out = "";
-        cmd.execCommand(command, arg).then(child => {
+        cmd.execCommand(command, arg, options).then(child => {
             child.stdout.on('data', data => out += data.toString());
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
@@ -165,14 +170,14 @@ function dockerComposeStart(file, options) {
     });
 }
 
-function dockerExec(container, exec_command, options) {
+function dockerExec(container, exec_command, args, options) {
     return new Promise((resolve, reject) => {
-        options = options ? options : [];
+        args = args ? args : [];
         var command = 'docker';
-        var arg = ['exec'].concat(options).concat(container).concat(exec_command);
+        var arg = ['exec'].concat(args).concat(container).concat(exec_command);
 
         var out = "";
-        cmd.execCommand(command, arg).then(child => {
+        cmd.execCommand(command, arg, options).then(child => {
             child.stdout.on('data', data => out += data.toString());
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
@@ -183,14 +188,14 @@ function dockerExec(container, exec_command, options) {
     });
 }
 
-function dockerInspectIPAddressOfContainer(container, options) {
+function dockerInspectIPAddressOfContainer(container, args, options) {
     return new Promise((resolve, reject) => {
-        options = options ? options : [];
+        args = args ? args : [];
         var command = 'docker';
-        var arg = ['inspect', '--format', "'{{.NetworkSettings.Networks." + options.network + ".IPAddress}}'", container];
+        var arg = ['inspect', '--format', "'{{.NetworkSettings.Networks." + args.network + ".IPAddress}}'", container];
 
         var out = "";
-        cmd.execCommand(command, arg).then(child => {
+        cmd.execCommand(command, arg, options).then(child => {
             child.stdout.on('data', data => out += data.toString());
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
@@ -201,14 +206,14 @@ function dockerInspectIPAddressOfContainer(container, options) {
     });
 }
 
-function dockerInspectPortOfContainer(container) {
+function dockerInspectPortOfContainer(container, options) {
     return new Promise((resolve, reject) => {
         // options = options ? options : [];
         var command = 'docker';
         var arg = ['inspect', '--format', "'{{.NetworkSettings.Ports}}'", container];
 
         var out = "";
-        cmd.execCommand(command, arg).then(child => {
+        cmd.execCommand(command, arg, options).then(child => {
             child.stdout.on('data', data => out += data.toString());
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
