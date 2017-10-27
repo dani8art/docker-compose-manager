@@ -31,7 +31,8 @@ module.exports = {
     /**
      * Docker compose up command. This up a docker-compose.yaml given
      * @param {string} file - The file with docker-componse that will be upped.
-     * @param {object} options - Options object.
+     * @param {object} args - Arguments object.
+     * @param {object} processOpt - child_process.spawn options.
      * @return {Promise} A promise.
      */
     dockerComposeUp: dockerComposeUp,
@@ -39,7 +40,8 @@ module.exports = {
     /**
      * Docker compose down command. This down a docker-compose.yaml given
      * @param {string} file - The file with docker-componse that will be down.
-     * @param {object} options - Options object.
+     * @param {object} args - Arguments object.
+     * @param {object} processOpt - child_process.spawn options.
      * @return {Promise} A promise.
      */
     dockerComposeDown: dockerComposeDown,
@@ -47,7 +49,8 @@ module.exports = {
     /**
      * Docker compose stop command. This stop a docker-compose.yaml given
      * @param {string} file - The file with docker-componse that will be stopped.
-     * @param {object} options - Options object.
+     * @param {object} args - Arguments object.
+     * @param {object} processOpt - child_process.spawn options.
      * @return {Promise} A promise.
      */
     dockerComposeStop: dockerComposeStop,
@@ -55,7 +58,8 @@ module.exports = {
     /**
      * Docker compose start command. This start a docker-compose.yaml given
      * @param {string} file - The file with docker-componse that will be started.
-     * @param {object} options - Options object.
+     * @param {object} args - Arguments object.
+     * @param {object} processOpt - child_process.spawn options.
      * @return {Promise} A promise.
      */
     dockerComposeStart: dockerComposeStart,
@@ -64,7 +68,8 @@ module.exports = {
      * Docker exec command. This execute a command on the container given
      * @param {string} container - The container where the command will be executed.
      * @param {object} exec_command - The command will be executed
-     * @param {string} options - Options object.
+     * @param {string} args - Arguments object.
+     * @param {object} processOpt - child_process.spawn options.
      * @return {Promise} A promise.
      */
     dockerExec: dockerExec,
@@ -72,7 +77,8 @@ module.exports = {
     /**
      * This method return the IP of a container given
      * @param {string} container - The container that will be inspected.
-     * @param {string} options - Options object. options.network
+     * @param {string} args - Options object. options.network
+     * @param {object} processOpt - child_process.spawn options.
      * @return {Promise} A promise.
      */
     dockerInspectIPAddressOfContainer: dockerInspectIPAddressOfContainer,
@@ -80,139 +86,139 @@ module.exports = {
     /**
      * This method return the PORT of a container given
      * @param {string} container - The container that will be inspected.
-     * @param {string} options - Options object. options.network
+     * @param {object} processOpt - child_process.spawn options.
      * @return {Promise} A promise.
      */
     dockerInspectPortOfContainer: dockerInspectPortOfContainer
 };
 
-function dockerComposeUp(file, options) {
+function dockerComposeUp(file, args, processOpt) {
     return new Promise((resolve, reject) => {
-        options = options ? options : [];
+        args = args ? args : [];
         var command = 'docker-compose';
 
         var defaultOptions = ['-f', file, 'up', '-d'];
-        if (options.indexOf('--abort-on-container-exit') > -1) {
+        if (args.indexOf('--abort-on-container-exit') > -1) {
             defaultOptions = ['-f', file, 'up'];
         }
 
-        var arg = defaultOptions.concat(options);
-
+        var arg = defaultOptions.concat(args);
         var out = "";
-        cmd.execCommand(command, arg).then(child => {
+
+        cmd.execCommand(command, arg, processOpt).then(child => {
             child.stdout.on('data', data => out += data.toString());
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
                 if (!code) resolve(out);
-                else reject({ code: code, err: out });
+                else reject({code: code, err: out});
             });
         });
     });
 }
 
-function dockerComposeDown(file, options) {
+function dockerComposeDown(file, args, processOpt) {
     return new Promise((resolve, reject) => {
-        options = options ? options : [];
+        args = args ? args : [];
         var command = 'docker-compose';
-        var arg = ['-f', file, 'down'].concat(options);
+        var arg = ['-f', file, 'down'].concat(args);
 
         var out = "";
-        cmd.execCommand(command, arg).then(child => {
+        cmd.execCommand(command, arg, processOpt).then(child => {
             child.stdout.on('data', data => out += data.toString());
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
                 if (!code) resolve(out);
-                else reject({ code: code, err: out });
+                else reject({code: code, err: out});
             });
         });
     });
 }
 
-function dockerComposeStop(file, options) {
+function dockerComposeStop(file, args, processOpt) {
     return new Promise((resolve, reject) => {
-        options = options ? options : [];
+        args = args ? args : [];
         var command = 'docker-compose';
-        var arg = ['-f', file, 'stop'].concat(options);
+        var arg = ['-f', file, 'stop'].concat(args);
 
         var out = "";
-        cmd.execCommand(command, arg).then(child => {
+        cmd.execCommand(command, arg, processOpt).then(child => {
             child.stdout.on('data', data => out += data.toString());
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
                 if (!code) resolve(out);
-                else reject({ code: code, err: out });
+                else reject({code: code, err: out});
             });
         });
     });
 }
 
-function dockerComposeStart(file, options) {
+function dockerComposeStart(file, args, processOpt) {
     return new Promise((resolve, reject) => {
-        options = options ? options : [];
+        args = args ? args : [];
         var command = 'docker-compose';
-        var arg = ['-f', file, 'start'].concat(options);
+        var arg = ['-f', file, 'start'].concat(args);
 
         var out = "";
-        cmd.execCommand(command, arg).then(child => {
+        cmd.execCommand(command, arg, processOpt).then(child => {
             child.stdout.on('data', data => out += data.toString());
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
                 if (!code) resolve(out);
-                else reject({ code: code, err: out });
+                else reject({code: code, err: out});
             });
         });
     });
 }
 
-function dockerExec(container, exec_command, options) {
+function dockerExec(container, exec_command, args, processOpt) {
     return new Promise((resolve, reject) => {
-        options = options ? options : [];
+        args = args ? args : [];
         var command = 'docker';
-        var arg = ['exec'].concat(options).concat(container).concat(exec_command);
+        var arg = ['exec'].concat(args).concat(container).concat(exec_command);
 
         var out = "";
-        cmd.execCommand(command, arg).then(child => {
+        cmd.execCommand(command, arg, processOpt).then(child => {
             child.stdout.on('data', data => out += data.toString());
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
                 if (!code) resolve(out);
-                else reject({ code: code, err: out });
+                else reject({code: code, err: out});
             });
         });
     });
 }
 
-function dockerInspectIPAddressOfContainer(container, options) {
+function dockerInspectIPAddressOfContainer(container, args, processOpt) {
     return new Promise((resolve, reject) => {
-        options = options ? options : [];
+        args = args ? args : [];
         var command = 'docker';
-        var arg = ['inspect', '--format', "'{{.NetworkSettings.Networks." + options.network + ".IPAddress}}'", container];
+        var arg = ['inspect', '--format', "'{{.NetworkSettings.Networks." + args.network + ".IPAddress}}'", container];
 
         var out = "";
-        cmd.execCommand(command, arg).then(child => {
+        cmd.execCommand(command, arg, processOpt).then(child => {
             child.stdout.on('data', data => out += data.toString());
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
                 if (!code) resolve(out.toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').replace(/'/ig, ''));
-                else reject({ code: code, err: out });
+                else reject({code: code, err: out});
             });
         });
     });
 }
 
-function dockerInspectPortOfContainer(container) {
+function dockerInspectPortOfContainer(container, processOpt) {
     return new Promise((resolve, reject) => {
         // options = options ? options : [];
         var command = 'docker';
         var arg = ['inspect', '--format', "'{{.NetworkSettings.Ports}}'", container];
 
         var out = "";
-        cmd.execCommand(command, arg).then(child => {
+        cmd.execCommand(command, arg, processOpt).then(child => {
             child.stdout.on('data', data => out += data.toString());
             child.stderr.on('data', data => out += data.toString());
             child.on('close', code => {
                 if (!code) resolve(out.toString('utf-8').replace(/(?:\r\n|\r|\n)/g, '').split("[")[1].split("/")[0].replace(/'/ig, ''));
-                else reject({ code: code, err: out });
+                else reject({code: code, err: out});
             });
         });
     });

@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 'use strict';
 
 /**
- * Command line interface 
+ * Command line interface
  * @module docker-compose-manager/cmd
  */
 
@@ -32,14 +32,19 @@ module.exports = {
     /**
      * Method for execute command
      * @param {string} command - The command to be executed.
+     * @param {object} args - Arguments object.
      * @param {object} options - Options object.
      * @return {Promise} A promise.
      */
-    execCommand: (command, options) => {
+    execCommand: (command, args, options) => {
+        if (typeof options === 'undefined') {
+            options = {}
+        }
+
         return new Promise((resolve, reject) => {
             var cmd;
             try {
-                cmd = spawn(command, options);
+                cmd = spawn(command, args, options);
                 resolve(cmd);
             } catch (e) {
                 reject(e);

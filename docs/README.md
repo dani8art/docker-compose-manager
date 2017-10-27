@@ -25,7 +25,8 @@ This method receives a URI of a file and builds, (re)creates, starts, and attach
   Name | Type | Description 
   -----|------|-------------
   **file** | `string` | **Required.** The file where the service is described. 
-  **options** | `[string]` | **Optional.** Docker compose up commad [options](https://docs.docker.com/compose/reference/up/).
+  **args** | `[string]` | **Optional.** Docker compose up commad [options](https://docs.docker.com/compose/reference/up/).
+  **options** | `[string]` | **Optional.** NodeJS child_process.spawn [options](https://nodejs.org/docs/latest-v6.x/api/child_process.html#child_process_child_process_spawn_command_args_options).
 
 #### Example
 
@@ -49,7 +50,8 @@ This method receives a URI of a file and stops containers, removes containers, n
   Name | Type | Description 
   -----|------|-------------
   **file** | `string` | **Required.** The file where the service is described. 
-  **options** | `[string]` | **Optional.** Docker compose down commad [options](https://docs.docker.com/compose/reference/down/).
+  **args** | `[string]` | **Optional.** Docker compose down commad [options](https://docs.docker.com/compose/reference/down/).
+  **options** | `[string]` | **Optional.** NodeJS child_process.spawn [options](https://nodejs.org/docs/latest-v6.x/api/child_process.html#child_process_child_process_spawn_command_args_options).
 
 #### Example
 
@@ -73,7 +75,8 @@ This method receives a URI of a file and stops running containers without removi
   Name | Type | Description 
   -----|------|-------------
   **file** | `string` | **Required.** The file where the service is described. 
-  **options** | `[string]` | **Optional.** Docker compose stop commad [options](https://docs.docker.com/compose/reference/stop/).
+  **args** | `[string]` | **Optional.** Docker compose stop commad [options](https://docs.docker.com/compose/reference/stop/).
+  **options** | `[string]` | **Optional.** NodeJS child_process.spawn [options](https://nodejs.org/docs/latest-v6.x/api/child_process.html#child_process_child_process_spawn_command_args_options).
 
 #### Example
 
@@ -97,7 +100,8 @@ This method receives a URI of a file and sStarts existing containers for a servi
   Name | Type | Description 
   -----|------|-------------
   **file** | `string` | **Required.** The file where the service is described. 
-  **options** | `[string]` | **Optional.** Docker compose start commad [options](https://docs.docker.com/compose/reference/start/).
+  **args** | `[string]` | **Optional.** Docker compose start commad [options](https://docs.docker.com/compose/reference/start/).
+  **options** | `[string]` | **Optional.** NodeJS child_process.spawn [options](https://nodejs.org/docs/latest-v6.x/api/child_process.html#child_process_child_process_spawn_command_args_options).
 
 #### Example
 
@@ -122,7 +126,8 @@ This method receives a container name and the command will be executed inside of
   -----|------|-------------
   **container** | `string` | **Required.** The container where the command will be executed.
   **exec_command** | `[string]` | **Required.** The command which will be executed.
-  **options** | `[string]` | **Optional.** Docker exec commad [options](https://docs.docker.com/engine/reference/commandline/exec/).
+  **args** | `[string]` | **Optional.** Docker exec commad [options](https://docs.docker.com/engine/reference/commandline/exec/).
+  **options** | `[string]` | **Optional.** NodeJS child_process.spawn [options](https://nodejs.org/docs/latest-v6.x/api/child_process.html#child_process_child_process_spawn_command_args_options).
 
 #### Example
 
@@ -147,7 +152,8 @@ This method receives a container and retrun a promise that resolves the ip of it
   Name | Type | Description 
   -----|------|-------------
   **container** | `string` | **Required.** The container for quering.
-  **options** | `object` | **Optional.** This object has only one field: `options.network`. This is the network where the container is attached.
+  **args** | `object` | **Optional.** This object has only one field: `options.network`. This is the network where the container is attached.
+  **options** | `[string]` | **Optional.** NodeJS child_process.spawn [options](https://nodejs.org/docs/latest-v6.x/api/child_process.html#child_process_child_process_spawn_command_args_options).
 
 #### Example
 
@@ -171,6 +177,7 @@ This method receives a container and retrun a promise that resolves the port on 
   Name | Type | Description 
   -----|------|-------------
   **container** | `string` | **Required.** The container for quering.
+  **options** | `[string]` | **Optional.** NodeJS child_process.spawn [options](https://nodejs.org/docs/latest-v6.x/api/child_process.html#child_process_child_process_spawn_command_args_options).
 
 #### Example
 
