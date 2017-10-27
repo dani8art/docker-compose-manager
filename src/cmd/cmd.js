@@ -33,18 +33,18 @@ module.exports = {
      * Method for execute command
      * @param {string} command - The command to be executed.
      * @param {object} args - Arguments object.
-     * @param {object} options - Options object.
+     * @param {object} processOptions - Process options object.
      * @return {Promise} A promise.
      */
-    execCommand: (command, args, options) => {
-        if (typeof options === 'undefined') {
-            options = {}
+    execCommand: (command, args, processOptions) => {
+        if (typeof processOptions === 'undefined') {
+            processOptions = {}
         }
 
         return new Promise((resolve, reject) => {
             var cmd;
             try {
-                cmd = spawn(command, args, options);
+                cmd = spawn(command, args, processOptions);
                 resolve(cmd);
             } catch (e) {
                 reject(e);
