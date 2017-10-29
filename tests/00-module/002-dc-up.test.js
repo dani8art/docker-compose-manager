@@ -27,17 +27,32 @@ var module = require('../../src/docker-compose-manager'),
     fs = require('fs');
 
 describe('docker-compose up tests', function () {
-    this.timeout(60000);
+    this.timeout(120000);
 
-    var file = __dirname + '/../docker-compose.yaml';
+    var file = __dirname + '/../without-environment/docker-compose.yaml';
+    var fileEnv = __dirname + '/../with-environment/docker-compose.yaml';
     it('Execute command up', done => {
 
         module.dockerComposeUp(file).then(out => {
-            expect(out.indexOf('Creating network "tests_default" with the default driver')).to.not.equal(-1);
-            expect(out.indexOf('Creating tests_mongo_1')).to.not.equal(-1);
+            expect(out.indexOf('Creating network "withoutenvironment_default" with the default driver')).to.not.equal(-1);
+            expect(out.indexOf('Creating withoutenvironment_mongo_1')).to.not.equal(-1);
             expect(out.indexOf('done')).to.not.equal(-1);
             done();
-        }, done);
+        }).catch(err => done(err));
+
+    });
+
+    it('Execute command up with env', done => {
+
+        process.env.MONGO_VERSION = '3.0.15';
+
+        module.dockerComposeUp(fileEnv).then(() => {
+            return module.dockerExec('withenvironment_mongo_1', ['mongo', '--version']);
+        }).then((out) => {
+            return Promise.resolve(expect(out.indexOf('3.0.15')).to.not.be.equal(-1));
+        }).then(() => {
+            return module.dockerComposeDown(fileEnv);
+        }).then(() => done()).catch(err => done(err));
 
     });
 

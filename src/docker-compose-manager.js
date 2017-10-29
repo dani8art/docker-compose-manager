@@ -184,7 +184,8 @@ function dockerExec(container, exec_command, options) {
 
 function dockerInspectIPAddressOfContainer(container, options) {
     return new Promise((resolve, reject) => {
-        options = options ? options : [];
+        options = options ? options : {};
+        if (!options.network) options.network = 'bridge';
         var command = 'docker';
         var arg = ['inspect', '--format', "'{{.NetworkSettings.Networks." + options.network + ".IPAddress}}'", container];
 
