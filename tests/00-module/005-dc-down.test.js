@@ -1,5 +1,5 @@
 /*!
-docker-composer-manager 0.1.2, built on: 2017-10-24
+docker-composer-manager 0.1.3, built on: 2017-10-30
 Copyright (C) 2017 Daniel Arteaga
 http://darteaga.com
 https://github.com/dani8art/docker-compose-manager
