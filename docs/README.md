@@ -27,7 +27,7 @@ This method receives a URI of a file and builds, (re)creates, starts, and attach
   **file** | `string` | **Required.** The file where the service is described. 
   **options** | `[string]` | **Optional.** Docker compose up commad [options](https://docs.docker.com/compose/reference/up/).
 
-#### Example
+#### Examples
 
 ```javascript
 var dcManager = require('docker-composer-manager');
@@ -39,6 +39,24 @@ dcManager.dockerComposeUp(file).then(out => {
     console.error(err);
 });
 ```
+
+For passing environment variables to the `docker-compose` command, It is used the `process.env` global variable as follow:
+
+```javascript
+var dcManager = require('docker-composer-manager');
+var file = __dirname + '/docker-compose.yaml';
+
+process.env.MONGO_VERSION = '3.0.15';
+
+dcManager.dockerComposeUp(file).then(() => {
+    return dcManager.dockerExec('withenvironment_mongo_1', ['mongo', '--version']);
+}).then((out) => {
+    return Promise.resolve(expect(out.indexOf('3.0.15')).to.not.be.equal(-1));
+}).then(() => {
+    return dcManager.dockerComposeDown(file);
+}).then(() => done()).catch(err => done(err));
+```
+
 
 ### DockerComposeDown 
 
