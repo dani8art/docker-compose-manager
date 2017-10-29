@@ -1,3 +1,9 @@
+### v0.1.3 - 2017-10-29
+
+- [#25](https://github.com/dani8art/docker-compose-manager/issues/25) - Try to increase docker-compose up timeout on CI
+
+- [#18](https://github.com/dani8art/docker-compose-manager/issues/18) - Add network by default in "DockerInspectIPAddressOfContainer"
+
 ### v0.1.2 - 2017-10-24
 
 - [#22](https://github.com/dani8art/docker-compose-manager/issues/22) - Remove '-d' option from dockerComposeUp command

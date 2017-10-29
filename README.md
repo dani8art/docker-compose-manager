@@ -12,8 +12,8 @@ For technical inquiry please contact to [engineering team](http://github.com/dan
 
 [![Build Status](https://travis-ci.org/dani8art/docker-compose-manager.svg?branch=master)](https://travis-ci.org/http://github.com/dani8art/docker-compose-manager)
 
-The version 0.1.2 is the latest stable version of docker-composer-manager component.
-see [release note](http://github.com/dani8art/docker-compose-manager/releases/tag/0.1.2) for details.
+The version 0.1.3 is the latest stable version of docker-composer-manager component.
+see [release note](http://github.com/dani8art/docker-compose-manager/releases/tag/0.1.3) for details.
 
-- Download this latest version from [0.1.2](http://github.com/dani8art/docker-compose-manager/releases/tag/0.1.2)
+- Download this latest version from [0.1.3](http://github.com/dani8art/docker-compose-manager/releases/tag/0.1.3)
 - For usage instructions please read [documentation](http://github.com/dani8art/docker-compose-manager/tree/master/docs)
