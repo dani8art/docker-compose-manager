@@ -53,4 +53,15 @@ describe('CMD Module tests', function () {
 
     });
 
+    it('The "execCommand" function with args and env return a child_process object', done => {
+
+        process.env.DIR = '/';
+
+        module.execCommand('ls', ['-la', '$DIR']).then(child => {
+            expect(child).to.not.be.equal(undefined);
+            done();
+        }, done);
+
+    });
+
 });

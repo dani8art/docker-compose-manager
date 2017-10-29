@@ -30,7 +30,7 @@ var module = require('../../src/docker-compose-manager'),
     logger = require('../../src/logger/logger');
 
 describe('Docker compose manager Module tests', function () {
-    this.timeout(60000);
+    this.timeout(120000);
 
     it('The module exposes "dockerComposeUp" function', () => {
 
@@ -82,19 +82,20 @@ describe('Docker compose manager Module tests', function () {
     });
 
     it('Functions sequence', done => {
-        var file = __dirname + '/../docker-compose.yaml';
+        var file = __dirname + '/../without-environment/docker-compose.yaml';
+
         module.dockerComposeUp(file).then(() => {
             return module.dockerComposeStop(file);
         }).then(() => {
             return module.dockerComposeStart(file);
         }).then(() => {
-            return module.dockerExec('tests_mongo_1', ['mongo', '--version']);
+            return module.dockerExec('withoutenvironment_mongo_1', ['mongo', '--version']);
         }).then(() => {
-            return module.dockerInspectIPAddressOfContainer('tests_mongo_1', { network: "tests_default" }).then(ip => {
+            return module.dockerInspectIPAddressOfContainer('withoutenvironment_mongo_1', { network: "withoutenvironment_default" }).then(ip => {
                 expect(ip).to.match(/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/);
             });
         }).then(() => {
-            return module.dockerInspectPortOfContainer('tests_mongo_1').then(port => {
+            return module.dockerInspectPortOfContainer('withoutenvironment_mongo_1').then(port => {
                 expect(port).to.be.equal('27017');
             });
         }).then(() => {

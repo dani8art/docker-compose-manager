@@ -29,7 +29,7 @@ var module = require('../../src/docker-compose-manager'),
 describe('docker-compose start tests', function () {
     this.timeout(30000);
 
-    var file = __dirname + '/../docker-compose.yaml';
+    var file = __dirname + '/../without-environment/docker-compose.yaml';
     it('Execute command start', done => {
 
         module.dockerComposeStart(file).then(out => {
