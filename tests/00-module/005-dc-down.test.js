@@ -29,14 +29,14 @@ var module = require('../../src/docker-compose-manager'),
 describe('docker-compose down tests', function () {
     this.timeout(30000);
 
-    var file = __dirname + '/../docker-compose.yaml';
+    var file = __dirname + '/../without-environment/docker-compose.yaml';
     it('Execute command down', done => {
 
         module.dockerComposeDown(file).then(out => {
-            expect(out.indexOf('Stopping tests_mongo_1')).to.not.equal(-1);
-            expect(out.indexOf('Removing tests_mongo_1')).to.not.equal(-1);
+            expect(out.indexOf('Stopping withoutenvironment_mongo_1')).to.not.equal(-1);
+            expect(out.indexOf('Removing withoutenvironment_mongo_1')).to.not.equal(-1);
             expect(out.indexOf('done')).to.not.equal(-1);
-            expect(out.indexOf('Removing network tests_default')).to.not.equal(-1);
+            expect(out.indexOf('Removing network withoutenvironment_default')).to.not.equal(-1);
             done();
         }, done);
 
